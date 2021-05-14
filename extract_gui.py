@@ -138,7 +138,6 @@ while True:
             filename = os.path.join(values["-FOLDER-"], values["-FILE LIST-"][0])         
 
             filename = filename.replace("/","\\")
-            filename = filename.replace("\\","\\")
             #print(filename)
             
             # new_path = copyfile(filename, temp)   
