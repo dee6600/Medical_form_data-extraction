@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\dee\\anaconda3\\envs\\py-gui\\python.exe"
+    "python.pythonPath": "C:\\Users\\dee\\anaconda3\\envs\\py-gui\\python.exe",
+    "python.linting.banditEnabled": true,
+    "python.linting.enabled": true
 }

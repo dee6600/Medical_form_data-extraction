@@ -1,8 +1,10 @@
 # img_viewer.py
 
+from typing import Sized
 import PySimpleGUI as sg
 import os.path
 from PIL import Image
+from PySimpleGUI.PySimpleGUI import Button, Submit
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 import pandas as pd
@@ -14,14 +16,15 @@ file_list_column = [
         sg.Text("Image Folder"),
         sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
         sg.FolderBrowse(),
+        sg.Button(button_text=" Extract ",disabled=True,key="-EXTRACT DATA-"),
     ],
     [
         sg.Listbox(
-            values=[], enable_events=True, size=(40, 10), key="-FILE LIST-"
+            values=[], enable_events=True, size=(55, 10), key="-FILE LIST-"
         )
     ],
     [
-        sg.Multiline(size=(40, 5), key='-OUTPUT TEXT-')
+        sg.Multiline(size=(55, 5), key='-OUTPUT TEXT-')
     ],
 ]
 
@@ -98,7 +101,8 @@ def extract_data(filename):
     #print(raw_result)
 
     raw_result_df = pd.DataFrame(raw_result)
-    print(raw_result_df)
+    #print(raw_result_df)
+    return raw_result_df
 
 
 
@@ -129,13 +133,19 @@ while True:
         try:
             filename = os.path.join(
                 values["-FOLDER-"], values["-FILE LIST-"][0]
-            )
+            )            
+
             window["-TOUT-"].update(filename)
-            window["-IMAGE-"].update(filename=filename)
-
-            extract_data(filename)
-           
-
+            window["-IMAGE-"].update(filename = filename,  size = (500,400))
+            
+            window.FindElement("-EXTRACT DATA-").Update(disabled=False)
+        except:
+            pass
+    
+    if event == '-EXTRACT DATA-':
+        try:
+            output_df = extract_data(filename)
+            window["-OUTPUT TEXT-"].update(output_df)
         except:
             pass
 
