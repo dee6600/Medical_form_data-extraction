@@ -8,6 +8,7 @@ from PySimpleGUI.PySimpleGUI import Button, Submit
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 import pandas as pd
+from shutil import copyfile
 
 # First the window layout in 2 columns
 
@@ -134,9 +135,16 @@ while True:
         window["-FILE LIST-"].update(fnames)
     elif event == "-FILE LIST-":  # A file was chosen from the listbox
         try:
-            filename = os.path.join(
-                values["-FOLDER-"], values["-FILE LIST-"][0]
-            )            
+            filename = os.path.join(values["-FOLDER-"], values["-FILE LIST-"][0])         
+
+            filename = filename.replace("/","\\")
+            filename = filename.replace("\\","\\")
+            #print(filename)
+            
+            # new_path = copyfile(filename, temp)   
+            # print(new_path)
+            # new_path = os.listdir("temp")
+            # sg.popup(new_path)
 
             window["-TOUT-"].update(filename)
             window["-IMAGE-"].update(filename = filename,  size = (500,400))
