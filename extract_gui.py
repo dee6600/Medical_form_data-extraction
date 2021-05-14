@@ -13,18 +13,21 @@ import pandas as pd
 
 file_list_column = [
     [
-        sg.Text("Image Folder"),
+        sg.Text("Choose Image Folder"),
         sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
         sg.FolderBrowse(),
         sg.Button(button_text=" Extract ",disabled=True,key="-EXTRACT DATA-"),
     ],
     [
         sg.Listbox(
-            values=[], enable_events=True, size=(55, 10), key="-FILE LIST-"
+            values=[], enable_events=True, size=(60, 10), key="-FILE LIST-"
         )
     ],
     [
-        sg.Multiline(size=(55, 5), key='-OUTPUT TEXT-')
+        sg.Multiline(size=(60, 5), key='-OUTPUT TEXT-')
+    ],
+    [
+        sg.Button(button_text=" EXIT ",key="Exit")
     ],
 ]
 
